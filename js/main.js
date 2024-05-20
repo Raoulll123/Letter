@@ -26,6 +26,9 @@ window.onload = function () {
             $('#stamp img').attr('src', result.stamp);
         }
         toBase64(result.bgm);
+
+        let container = document.getElementById('data'); // 替换为你的容器 ID
+        container.scrollTop = container.scrollHeight;
     });
 
     document.addEventListener('touchstart', function (event) {
