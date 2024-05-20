@@ -21,10 +21,6 @@ window.onload = function () {
         let dataDiv = document.getElementById('data');
         let autoScroll = true;
         
-        dataDiv.addEventListener('scroll', function() {
-            autoScroll = dataDiv.scrollTop + dataDiv.clientHeight !== dataDiv.scrollHeight;
-        });
-        
         let intervalId = setInterval(function() {
             if(autoScroll) {
                 dataDiv.scrollTop = dataDiv.scrollHeight;
