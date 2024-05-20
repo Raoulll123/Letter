@@ -18,17 +18,22 @@ window.onload = function () {
         content.from = result.from;
         content.recipient = result.recipient;
         content.text = result.text;
+        let dataDiv = document.getElementById('data');
+        setInterval(function() {
+            dataDiv.scrollTop = dataDiv.scrollHeight;
+        }, 500);
         content.sign = getPureStr(content.from).pxWidth('18px Satisfy, serif');
         document.title = result.title;
         $('#recipient').append(content.to);
-        $('#flipback').text(result.sender);
+        // $('#flipback').text(result.sender);
+        let data = JSON.parse(jsonString);
+        data.sender = data.sender.replace(/\n/g, '<br>');
+        $('#flipback').html(data.sender);
+
         if (result.stamp != null) {
             $('#stamp img').attr('src', result.stamp);
         }
         toBase64(result.bgm);
-
-        let container = document.getElementById('data'); // 替换为你的容器 ID
-        container.scrollTop = container.scrollHeight;
     });
 
     document.addEventListener('touchstart', function (event) {
