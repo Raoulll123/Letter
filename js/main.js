@@ -19,9 +19,18 @@ window.onload = function () {
         content.recipient = result.recipient;
         content.text = result.text;
         let dataDiv = document.getElementById('data');
+        let autoScroll = true;
+        
+        dataDiv.addEventListener('scroll', function() {
+            autoScroll = dataDiv.scrollTop + dataDiv.clientHeight !== dataDiv.scrollHeight;
+        });
+        
         setInterval(function() {
-            dataDiv.scrollTop = dataDiv.scrollHeight;
+            if(autoScroll) {
+                dataDiv.scrollTop = dataDiv.scrollHeight;
+            }
         }, 500);
+        
         content.sign = getPureStr(content.from).pxWidth('18px Satisfy, serif');
         document.title = result.title;
         $('#recipient').append(content.to);
