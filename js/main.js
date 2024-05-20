@@ -26,9 +26,8 @@ window.onload = function () {
         document.title = result.title;
         $('#recipient').append(content.to);
         // $('#flipback').text(result.sender);
-        let data = JSON.parse(jsonString);
-        data.sender = data.sender.replace(/\n/g, '<br>');
-        $('#flipback').html(data.sender);
+        result.sender = result.sender.replace(/\n/g, '<br>');
+        $('#flipback').html(result.sender);
 
         if (result.stamp != null) {
             $('#stamp img').attr('src', result.stamp);
