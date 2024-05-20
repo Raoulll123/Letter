@@ -18,22 +18,23 @@ window.onload = function () {
         content.from = result.from;
         content.recipient = result.recipient;
         content.text = result.text;
-        var div = document.getElementById('data');
-        var isUserScrolling = false;
+        let dataDiv = document.getElementById('data');
+        let autoScroll = true;
         
-        div.addEventListener('scroll', function() {
-            // 用户滚动时，设置isUserScrolling为true
-            isUserScrolling = true;
+        dataDiv.addEventListener('scroll', function() {
+            autoScroll = dataDiv.scrollTop + dataDiv.clientHeight !== dataDiv.scrollHeight;
         });
         
-        function scrollToBottom() {
-            if(!isUserScrolling) {
-                div.scrollTop = div.scrollHeight;
+        let intervalId = setInterval(function() {
+            if(autoScroll) {
+                dataDiv.scrollTop = dataDiv.scrollHeight;
             }
-        }
+        }, 500);
         
-        // 每100毫秒检查一次
-        setInterval(scrollToBottom, 200);        
+        setTimeout(function() {
+            clearInterval(intervalId);
+        }, 120000);     
+             
         
         content.sign = getPureStr(content.from).pxWidth('18px Satisfy, serif');
         document.title = result.title;
