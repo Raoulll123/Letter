@@ -18,24 +18,22 @@ window.onload = function () {
         content.from = result.from;
         content.recipient = result.recipient;
         content.text = result.text;
-        let div = document.getElementById('data');
-        var shouldScroll = true;
+        var div = document.getElementById('data');
+        var isUserScrolling = false;
         
         div.addEventListener('scroll', function() {
-          // 用户向上滚动时，停止自动滚动
-          if(div.scrollTop + div.clientHeight < div.scrollHeight) {
-            shouldScroll = false;
-          }
+            // 用户滚动时，设置isUserScrolling为true
+            isUserScrolling = true;
         });
         
-        var observer = new MutationObserver(function() {
-          // 当有新的文字出现并且应该滚动时，滚动到底部
-          if(shouldScroll) {
-            div.scrollTop = div.scrollHeight;
-          }
-        });
+        function scrollToBottom() {
+            if(!isUserScrolling) {
+                div.scrollTop = div.scrollHeight;
+            }
+        }
         
-        observer.observe(div, {childList: true});
+        // 每100毫秒检查一次
+        setInterval(scrollToBottom, 200);        
         
         content.sign = getPureStr(content.from).pxWidth('18px Satisfy, serif');
         document.title = result.title;
